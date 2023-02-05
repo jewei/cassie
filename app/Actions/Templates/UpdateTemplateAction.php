@@ -3,6 +3,7 @@
 namespace App\Actions\Templates;
 
 use App\Models\Template;
+use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Validator;
 
 final readonly class UpdateTemplateAction
@@ -12,6 +13,9 @@ final readonly class UpdateTemplateAction
     ) {
     }
 
+    /**
+     * @param array<string, string|UploadedFile> $input
+     */
     public function execute(Template $template, array $input): void
     {
         Validator::make($input, [

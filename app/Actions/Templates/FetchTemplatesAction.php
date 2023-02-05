@@ -7,6 +7,9 @@ use Illuminate\Database\Eloquent\Collection;
 
 final readonly class FetchTemplatesAction
 {
+    /**
+     * @return Collection<int, Template>
+     */
     public function execute(): Collection
     {
         return Template::query()

@@ -57,6 +57,9 @@ final readonly class RenderCertificateAction
         ]);
     }
 
+    /**
+     * @param ArrayObject<int, string> $properties
+     */
     private function getNameImageData(string $name, ArrayObject $properties): string
     {
         $paperFormat = '\App\Enums\\' . $properties['format'];
@@ -69,7 +72,7 @@ final readonly class RenderCertificateAction
             ? Storage::disk('local')->path('fonts' . DIRECTORY_SEPARATOR . $properties['font'])
             : throw new FontNotFoundException('Font not found: ' . $properties['font']);
 
-        [$lowerLeftX,, $lowerRightX, $lowerRightY,, $upperRightY] = imagettfbbox($properties['font_size'], 0, $font, $name); // https://bugs.php.net/bug.php?id=81334
+        [$lowerLeftX,, $lowerRightX, $lowerRightY,, $upperRightY] = imagettfbbox((float) $properties['font_size'], 0, $font, $name); // https://bugs.php.net/bug.php?id=81334
 
         [$red, $green, $blue] = str_split($properties['font_colour'], 2);
 
@@ -81,7 +84,7 @@ final readonly class RenderCertificateAction
 
         imagettftext(
             image: $image,
-            size: $properties['font_size'],
+            size: (float) $properties['font_size'],
             angle: 0,
             x: (int) ($paperWidth - $lowerRightX + $lowerLeftX + $properties['x_offset']) / 2,
             y: (int) ($paperHeight - $lowerRightY + $upperRightY + $properties['y_offset']) / 2,

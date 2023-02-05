@@ -29,6 +29,9 @@ class Certificate extends Model
         'rendered_at',
     ];
 
+    /**
+     * @var array<string>
+     */
     protected $appends = [
         'file_exists',
         'path',
@@ -37,16 +40,25 @@ class Certificate extends Model
         'download_filename',
     ];
 
+    /**
+     * @return BelongsTo<Template, Certificate>
+     */
     public function template(): BelongsTo
     {
         return $this->belongsTo(Template::class);
     }
 
+    /**
+     * @return array<string>
+     */
     public function uniqueIds(): array
     {
         return ['uuid'];
     }
 
+    /**
+     * @return Attribute<bool, never>
+     */
     protected function fileExists(): Attribute
     {
         return Attribute::make(
@@ -54,6 +66,9 @@ class Certificate extends Model
         );
     }
 
+    /**
+     * @return Attribute<string, never>
+     */
     protected function path(): Attribute
     {
         return Attribute::make(
@@ -61,6 +76,9 @@ class Certificate extends Model
         );
     }
 
+    /**
+     * @return Attribute<string, never>
+     */
     protected function disk(): Attribute
     {
         return Attribute::make(
@@ -68,6 +86,9 @@ class Certificate extends Model
         );
     }
 
+    /**
+     * @return Attribute<string, never>
+     */
     protected function filename(): Attribute
     {
         return Attribute::make(
@@ -75,6 +96,9 @@ class Certificate extends Model
         );
     }
 
+    /**
+     * @return Attribute<string, never>
+     */
     protected function downloadFilename(): Attribute
     {
         return Attribute::make(

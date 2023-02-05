@@ -16,6 +16,9 @@ final readonly class UpdateParticipantsAction
     ) {
     }
 
+    /**
+     * @param array<string, string> $input
+     */
     public function execute(Template $template, array $input): void
     {
         Validator::make($input, [

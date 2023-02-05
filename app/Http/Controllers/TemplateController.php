@@ -6,17 +6,19 @@ use App\Actions\Templates\DeleteTemplateAction;
 use App\Actions\Templates\FetchTemplatesAction;
 use App\Actions\Templates\UpdateTemplateAction;
 use App\Models\Template;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
+use Inertia\Response as InertiaResponse;
 
 class TemplateController extends Controller
 {
-    public function index(FetchTemplatesAction $action)
+    public function index(FetchTemplatesAction $action): InertiaResponse
     {
         return Inertia::render('Template/Index', ['templates' => $action->execute()]);
     }
 
-    public function create()
+    public function create(): InertiaResponse
     {
         return Inertia::render('Template/Form', [
             'template' => new Template(),
@@ -25,7 +27,7 @@ class TemplateController extends Controller
         ]);
     }
 
-    public function edit(Template $template)
+    public function edit(Template $template): InertiaResponse
     {
         return Inertia::render('Template/Form', [
             'template' => $template,
@@ -34,21 +36,21 @@ class TemplateController extends Controller
         ]);
     }
 
-    public function update(Request $request, Template $template, UpdateTemplateAction $action)
+    public function update(Request $request, Template $template, UpdateTemplateAction $action): RedirectResponse
     {
         $action->execute($template, $request->all());
 
         return redirect()->intended(route('templates.index'))->with('status', 'template updated.');
     }
 
-    public function store(Request $request, UpdateTemplateAction $action)
+    public function store(Request $request, UpdateTemplateAction $action): RedirectResponse
     {
         $action->execute(new Template(), $request->all());
 
         return redirect()->intended(route('templates.index'))->with('status', 'template saved.');
     }
 
-    public function destroy(Template $template, DeleteTemplateAction $action)
+    public function destroy(Template $template, DeleteTemplateAction $action): RedirectResponse
     {
         $action->execute($template);
 

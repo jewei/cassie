@@ -25,15 +25,24 @@ class Template extends Model
         'properties' => AsArrayObject::class,
     ];
 
+    /**
+     * @var array<string>
+     */
     protected $appends = [
         'thumbnail_url',
     ];
 
+    /**
+     * @return HasMany<Certificate>
+     */
     public function certificates(): HasMany
     {
         return $this->hasMany(Certificate::class);
     }
 
+    /**
+     * @return Attribute<string, never>
+     */
     protected function updatedAt(): Attribute
     {
         return Attribute::make(
@@ -41,6 +50,9 @@ class Template extends Model
         );
     }
 
+    /**
+     * @return Attribute<string, never>
+     */
     protected function thumbnailUrl(): Attribute
     {
         return Attribute::make(

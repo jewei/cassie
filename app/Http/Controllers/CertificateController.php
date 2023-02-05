@@ -9,20 +9,26 @@ use App\Actions\Participants\InvalidParticipantException;
 use App\Actions\Participants\UpdateParticipantsAction;
 use App\Models\Certificate;
 use App\Models\Template;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Inertia\Inertia;
+use Inertia\Response as InertiaResponse;
+use Symfony\Component\HttpFoundation\BinaryFileResponse;
 
 class CertificateController extends Controller
 {
-    public function create(Template $template, FetchParticipantsAction $action)
+    public function create(Template $template, FetchParticipantsAction $action): InertiaResponse
     {
+        $participants = $action->execute($template);
+
         return Inertia::render('Participant/Form', [
             'template' => $template,
-            'datatext' => trim($template->certificates->reduce(fn ($carry, $item) => $carry . PHP_EOL . $item->name . ', ' . $item->email)),
+            'datatext' => trim($participants->reduce(fn ($carry, $item) => $carry . PHP_EOL . $item->name . ', ' . $item->email)),
         ]);
     }
 
-    public function show(Request $request, Template $template, Certificate $certificate, ShowCertificateAction $action)
+    public function show(Request $request, Template $template, Certificate $certificate, ShowCertificateAction $action): BinaryFileResponse
     {
         $certificate->setRelation('template', $template);
 
@@ -37,7 +43,7 @@ class CertificateController extends Controller
             ]);
     }
 
-    public function index(Template $template, FetchParticipantsAction $action)
+    public function index(Template $template, FetchParticipantsAction $action): InertiaResponse
     {
         return Inertia::render('Participant/Index', [
             'template' => $template,
@@ -45,7 +51,7 @@ class CertificateController extends Controller
         ]);
     }
 
-    public function store(Request $request, Template $template, UpdateParticipantsAction $action)
+    public function store(Request $request, Template $template, UpdateParticipantsAction $action): RedirectResponse
     {
         try {
             $action->execute($template, $request->all());
@@ -60,7 +66,7 @@ class CertificateController extends Controller
             ->with('status', 'participants saved.');
     }
 
-    public function destroy(Certificate $certificate, DeleteCertificateAction $action)
+    public function destroy(Certificate $certificate, DeleteCertificateAction $action): Response
     {
         $action->execute($certificate);
 
