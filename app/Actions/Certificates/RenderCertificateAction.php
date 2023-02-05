@@ -23,9 +23,9 @@ final readonly class RenderCertificateAction
 
         $pdf->setTitle($properties['title']);
         $pdf->setSubject($properties['subject'] ?? '');
-        $pdf->setAuthor($properties['author' ?? '']);
-        $pdf->setCreator($properties['creator' ?? '']);
-        $pdf->setKeywords($properties['keywords' ?? '']);
+        $pdf->setAuthor($properties['author'] ?? '');
+        $pdf->setCreator($properties['creator'] ?? '');
+        $pdf->setKeywords($properties['keywords'] ?? '');
         $pdf->setMargins(0, 0, 0, true);
         $pdf->setAutoPageBreak(false, 0);
 
