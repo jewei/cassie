@@ -9,6 +9,14 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Facades\Storage;
 
+/**
+ * @property string $uuid
+ * @property string $file_exists
+ * @property string $path
+ * @property string $disk
+ * @property string $filename
+ * @property string $download_filename
+ */
 class Certificate extends Model
 {
     use HasFactory;
