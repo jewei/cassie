@@ -34,7 +34,8 @@ defineProps({ templates: Array });
                                     type="button"
                                     class="inline-flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:w-auto"
                                 >
-                                    Add template</Link>
+                                    Add template
+                                </Link>
                             </div>
                         </div>
                         <div class="mt-8 flex flex-col">
@@ -64,11 +65,7 @@ defineProps({ templates: Array });
                                                 <tr
                                                     v-for="(template, idx) in templates"
                                                     :key="template.id"
-                                                    :class="
-                                                        idx % 2 === 0
-                                                            ? undefined
-                                                            : 'bg-gray-50'
-                                                    ">
+                                                    :class="idx % 2 === 0 ? '': 'bg-gray-50'">
                                                     <td class="whitespace-nowrap px-3 py-4 text-right text-gray-500">
                                                         <img
                                                             :src="template.thumbnail_url"
@@ -87,11 +84,7 @@ defineProps({ templates: Array });
                                                             class="text-indigo-600 hover:text-indigo-900"
                                                             preserve-scroll
                                                         >
-                                                            {{
-                                                                template.certificates_count > 0
-                                                                    ? "Edit participants"
-                                                                    : "Add participants"
-                                                            }}
+                                                            {{ template.certificates_count > 0 ? "Edit participants" : "Add participants" }}
                                                         </Link>
                                                     </td>
                                                     <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">

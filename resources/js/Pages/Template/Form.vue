@@ -66,8 +66,7 @@ const updateimagePreview = () => {
 
 const destroy = () => {
     router.delete(`/templates/${props.template.id}`, {
-        onBefore: () =>
-            confirm("Are you sure you want to delete this template?"),
+        onBefore: () => confirm("Are you sure you want to delete this template?"),
     });
 };
 </script>
@@ -408,9 +407,7 @@ const destroy = () => {
                                                 class="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2"
                                                 >Font
                                             </label>
-                                            <div
-                                                class="mt-1 sm:col-span-2 sm:mt-0"
-                                            >
+                                            <div class="mt-1 sm:col-span-2 sm:mt-0">
                                                 <input
                                                     type="text"
                                                     name="font"
