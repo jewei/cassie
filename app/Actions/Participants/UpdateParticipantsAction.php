@@ -36,7 +36,7 @@ final readonly class UpdateParticipantsAction
         DB::transaction(function () use ($lines, $template) {
             foreach ($lines as $line) {
                 try {
-                    $this->saveParticipants($template, ...array_map('trim', str_getcsv($line)));
+                    $this->saveParticipant($template, ...array_map('trim', str_getcsv($line)));
                 } catch (\Throwable) {
                     throw new InvalidParticipantException('Invalid participant: ' . $line);
                 }
@@ -44,7 +44,7 @@ final readonly class UpdateParticipantsAction
         });
     }
 
-    private function saveParticipants(Template $template, string $name, string $email): void
+    private function saveParticipant(Template $template, string $name, string $email): void
     {
         $certificate = $template->certificates()->create([
             'name' => $name,

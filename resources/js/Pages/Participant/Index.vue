@@ -1,6 +1,6 @@
 <script setup>
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
-import { Head, Link } from "@inertiajs/vue3";
+import { Head, Link, router } from "@inertiajs/vue3";
 
 defineProps({
     template: Object,
@@ -78,16 +78,20 @@ defineProps({
                                                     </td>
                                                     <td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
                                                         <a
+                                                            v-if="participant.rendered_at"
                                                             :href="route('templates.certificates.show', [template.id, participant.id])"
                                                             class="text-indigo-600 hover:text-indigo-900"
                                                             preserve-scroll
                                                             >View
                                                         </a>
-                                                        <a :href="route('templates.certificates.show', [template.id, participant.id]) + '?download=1'"
+                                                        <a 
+                                                            v-if="participant.rendered_at"
+                                                            :href="route('templates.certificates.show', [template.id, participant.id]) + '?download=1'"
                                                             class="ml-2 text-indigo-600 hover:text-indigo-900"
                                                             preserve-scroll
                                                             >Download
                                                         </a>
+                                                        <span v-if="!participant.rendered_at" @click="router.reload({ only: ['participants'] })" class="text-gray-500">Generating...</span>
                                                     </td>
                                                 </tr>
                                             </tbody>
