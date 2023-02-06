@@ -84,7 +84,7 @@ defineProps({ templates: Array });
                                                             class="text-indigo-600 hover:text-indigo-900"
                                                             preserve-scroll
                                                         >
-                                                            {{ template.certificates_count > 0 ? "Edit participants" : "Add participants" }}
+                                                            {{ template.certificates_count > 0 ? "View participants" : "Add participants" }}
                                                         </Link>
                                                     </td>
                                                     <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
