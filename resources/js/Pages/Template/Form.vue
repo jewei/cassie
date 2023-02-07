@@ -3,12 +3,17 @@ import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
 import InputError from "@/Components/InputError.vue";
 import { ref } from "vue";
 import { Head, Link, useForm, router } from "@inertiajs/vue3";
+import { Listbox, ListboxButton, ListboxLabel, ListboxOption, ListboxOptions } from '@headlessui/vue';
+import { CheckIcon, ChevronUpDownIcon } from '@heroicons/vue/20/solid';
 
 const props = defineProps({
     template: Object,
+    paperFonts: Object,
     maxUploadSize: String,
     mode: String,
 });
+
+const paperFormats = ['A1', 'A2', 'A3', 'A4', 'A5', 'A6'];
 
 const form = useForm({
     _method: props.mode === "edit" ? "PUT" : "POST",
@@ -360,27 +365,32 @@ const destroy = () => {
                                                         </div>
                                                     </div>
                                                     <div class="sm:col-span-2">
-                                                        <div class="max-w-lg">
-                                                            <p class="text-sm text-gray-500">
-                                                                Only supporting
-                                                                A4 for now.
-                                                            </p>
-                                                            <div class="mt-4 space-y-4">
-                                                                <div class="flex items-center">
-                                                                    <input
-                                                                        id="format"
-                                                                        name="format"
-                                                                        type="radio"
-                                                                        value="A4"
-                                                                        v-model="form.properties.format"
-                                                                        class="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-500"
-                                                                    />
-                                                                    <label
-                                                                        for="format"
-                                                                        class="ml-3 block text-sm font-medium text-gray-700"
-                                                                        >A4
-                                                                    </label>
-                                                                </div>
+                                                        <div class="max-w-lg sm:max-w-xs sm:text-sm">
+                                                            <div class="space-y-4">
+                                                                <Listbox as="div" v-model="form.properties.format">
+                                                                    <div class="relative mt-1">
+                                                                    <ListboxButton class="relative w-full max-w-lg cursor-default rounded-md border border-gray-300 bg-white py-2 pl-3 pr-10 text-left shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 sm:text-sm">
+                                                                        <span class="block truncate">{{ form.properties.format }}</span>
+                                                                        <span class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
+                                                                        <ChevronUpDownIcon class="h-5 w-5 text-gray-400" aria-hidden="true" />
+                                                                        </span>
+                                                                    </ListboxButton>
+
+                                                                    <transition leave-active-class="transition ease-in duration-100" leave-from-class="opacity-100" leave-to-class="opacity-0">
+                                                                        <ListboxOptions class="absolute z-10 mt-1 max-h-60 w-full max-w-lg overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
+                                                                        <ListboxOption as="template" v-for="paperFormat in paperFormats" :key="paperFormat" :value="paperFormat" v-slot="{ active, selected }">
+                                                                            <li :class="[active ? 'text-white bg-indigo-600' : 'text-gray-900', 'relative cursor-default select-none py-2 pl-3 pr-9']">
+                                                                            <span :class="[selected ? 'font-semibold' : 'font-normal', 'block truncate']">{{ paperFormat }}</span>
+
+                                                                            <span v-if="selected" :class="[active ? 'text-white' : 'text-indigo-600', 'absolute inset-y-0 right-0 flex items-center pr-4']">
+                                                                                <CheckIcon class="h-5 w-5" aria-hidden="true" />
+                                                                            </span>
+                                                                            </li>
+                                                                        </ListboxOption>
+                                                                        </ListboxOptions>
+                                                                    </transition>
+                                                                    </div>
+                                                                </Listbox>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -408,13 +418,34 @@ const destroy = () => {
                                                 >Font
                                             </label>
                                             <div class="mt-1 sm:col-span-2 sm:mt-0">
-                                                <input
-                                                    type="text"
-                                                    name="font"
-                                                    id="font"
-                                                    v-model="form.properties.font"
-                                                    class="block w-full max-w-lg rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:max-w-xs sm:text-sm"
-                                                />
+                                                <div class="max-w-lg sm:max-w-xs sm:text-sm">
+                                                    <div class="space-y-4">
+                                                        <Listbox as="div" v-model="form.properties.font">
+                                                            <div class="relative mt-1">
+                                                            <ListboxButton class="relative w-full max-w-lg cursor-default rounded-md border border-gray-300 bg-white py-2 pl-3 pr-10 text-left shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 sm:text-sm">
+                                                                <span class="block truncate">{{ form.properties.font }}</span>
+                                                                <span class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
+                                                                <ChevronUpDownIcon class="h-5 w-5 text-gray-400" aria-hidden="true" />
+                                                                </span>
+                                                            </ListboxButton>
+
+                                                            <transition leave-active-class="transition ease-in duration-100" leave-from-class="opacity-100" leave-to-class="opacity-0">
+                                                                <ListboxOptions class="absolute z-10 mt-1 max-h-60 w-full max-w-lg overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
+                                                                <ListboxOption as="template" v-for="paperFont in props.paperFonts" :key="paperFont" :value="paperFont" v-slot="{ active, selected }">
+                                                                    <li :class="[active ? 'text-white bg-indigo-600' : 'text-gray-900', 'relative cursor-default select-none py-2 pl-3 pr-9']">
+                                                                    <span :class="[selected ? 'font-semibold' : 'font-normal', 'block truncate']">{{ paperFont }}</span>
+
+                                                                    <span v-if="selected" :class="[active ? 'text-white' : 'text-indigo-600', 'absolute inset-y-0 right-0 flex items-center pr-4']">
+                                                                        <CheckIcon class="h-5 w-5" aria-hidden="true" />
+                                                                    </span>
+                                                                    </li>
+                                                                </ListboxOption>
+                                                                </ListboxOptions>
+                                                            </transition>
+                                                            </div>
+                                                        </Listbox>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
 
