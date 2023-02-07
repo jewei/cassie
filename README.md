@@ -1,6 +1,6 @@
 # Cassie Lite
 
-Cassie Lite is the light version of Cassie, certificate as a service.
+Cassie Lite is the light version of Cassie, certificate as a service. https://jewei.net/cassie/
 
 ## Setup
 
