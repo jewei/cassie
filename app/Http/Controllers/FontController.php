@@ -13,7 +13,10 @@ class FontController extends Controller
     public function index(): InertiaResponse
     {
         return Inertia::render('Font/Index', [
-            'fonts' => Storage::disk('local')->files('fonts'),
+            'fonts' => array_map(
+                fn ($font) => ltrim($font, 'fonts/'),
+                Storage::disk('local')->files('fonts')
+            ),
         ]);
     }
 
