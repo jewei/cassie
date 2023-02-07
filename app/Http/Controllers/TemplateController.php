@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Actions\Fonts\FetchFontsAction;
 use App\Actions\Templates\DeleteTemplateAction;
 use App\Actions\Templates\FetchTemplatesAction;
 use App\Actions\Templates\UpdateTemplateAction;
@@ -27,10 +28,11 @@ class TemplateController extends Controller
         ]);
     }
 
-    public function edit(Template $template): InertiaResponse
+    public function edit(Template $template, FetchFontsAction $action): InertiaResponse
     {
         return Inertia::render('Template/Form', [
             'template' => $template,
+            'paperFonts' => $action->execute(),
             'maxUploadSize' => min(ini_get('post_max_size'), ini_get('upload_max_filesize')),
             'mode' => 'edit',
         ]);

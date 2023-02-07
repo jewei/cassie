@@ -3,6 +3,7 @@
 use App\Http\Controllers\CertificateController;
 use App\Http\Controllers\FontController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\SettingController;
 use App\Http\Controllers\TemplateController;
 use Illuminate\Support\Facades\Route;
 
@@ -21,8 +22,15 @@ Route::middleware('auth')->group(function () {
 
     Route::resource('templates.certificates', CertificateController::class)->only(['index', 'show', 'create', 'store']);
 
-    Route::delete('fonts', [FontController::class, 'destroy'])->name('fonts.destroy');
-    Route::resource('fonts', FontController::class)->only('index', 'store');
+    Route::get('settings', [SettingController::class, 'index'])->name('settings.index');
+
+    Route::controller(FontController::class)
+        ->prefix('fonts')
+        ->name('fonts.')
+        ->group(function () {
+            Route::post('/', 'store')->name('store');
+            Route::delete('/', 'destroy')->name('destroy');
+        });
 
     Route::controller(ProfileController::class)
         ->prefix('profile')
@@ -30,7 +38,7 @@ Route::middleware('auth')->group(function () {
         ->group(function () {
             Route::get('/', 'edit')->name('edit');
             Route::patch('/', 'update')->name('update');
-            Route::delete('/', 'ddestroy')->name('destroy');
+            Route::delete('/', 'destroy')->name('destroy');
         });
 });
 

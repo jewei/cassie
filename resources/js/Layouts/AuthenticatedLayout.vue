@@ -32,8 +32,8 @@ const showingNavigationDropdown = ref(false);
                                 <NavLink :href="route('templates.index')" :active="route().current('templates.index')">
                                     Dashboard
                                 </NavLink>
-                                <NavLink :href="route('fonts.index')" :active="route().current('fonts.index')">
-                                    Fonts
+                                <NavLink :href="route('settings.index')" :active="route().current('settings.index')">
+                                    Settings
                                 </NavLink>
                             </div>
                         </div>
@@ -118,8 +118,8 @@ const showingNavigationDropdown = ref(false);
                         <ResponsiveNavLink :href="route('templates.index')" :active="route().current('templates.index')">
                             Dashboard
                         </ResponsiveNavLink>
-                        <ResponsiveNavLink :href="route('fonts.index')" :active="route().current('fonts.index')">
-                            Fonts
+                        <ResponsiveNavLink :href="route('settings.index')" :active="route().current('settings.index')">
+                            Settings
                         </ResponsiveNavLink>
                     </div>
 

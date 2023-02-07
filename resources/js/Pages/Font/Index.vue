@@ -4,8 +4,9 @@ import InputError from "@/Components/InputError.vue";
 import { ref } from "vue";
 import { Head, Link, useForm, router } from "@inertiajs/vue3";
 
-defineProps({
+const props = defineProps({
     fonts: Array,
+    errors: Object,
 });
 
 const form = useForm({
@@ -31,12 +32,12 @@ const destroy = (font) => {
 </script>
 
 <template>
-    <Head title="Fonts" />
+    <Head title="Settings" />
 
     <AuthenticatedLayout>
         <template #header>
             <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-                Fonts
+                Settings
             </h2>
         </template>
 
@@ -65,6 +66,10 @@ const destroy = (font) => {
                                 >
                                     Upload
                                 </Link>
+                                <InputError
+                                    :message="props.errors.font"
+                                    class="mt-2"
+                                />
 
                                 <form @submit.prevent="submit">
                                     <input
@@ -80,10 +85,6 @@ const destroy = (font) => {
                                         max="100">
                                         {{ form.progress.percentage }}%
                                     </progress>
-                                    <InputError
-                                        :message="form.errors.font"
-                                        class="mt-2"
-                                    />
                                 </form>
                             </div>
                         </div>

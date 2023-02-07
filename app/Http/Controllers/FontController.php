@@ -2,45 +2,35 @@
 
 namespace App\Http\Controllers;
 
+use App\Actions\Fonts\SaveFontAction;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
-use Inertia\Inertia;
-use Inertia\Response as InertiaResponse;
+use Illuminate\Support\Facades\Validator;
 
 class FontController extends Controller
 {
-    public function index(): InertiaResponse
+    public function store(Request $request, SaveFontAction $action): RedirectResponse
     {
-        return Inertia::render('Font/Index', [
-            'fonts' => array_map(
-                fn ($font) => ltrim($font, 'fonts/'),
-                Storage::disk('local')->files('fonts')
-            ),
-        ]);
-    }
+        Validator::make($request->all(), [
+            'font' => ['required', 'mimes:ttf', 'max:4096'],
+        ])->validate();
 
-    public function store(Request $request): RedirectResponse
-    {
-        Storage::putFileAs(
-            'fonts',
-            $request->file('font'),
-            $request->file('font')->getClientOriginalName()
-        );
+        $action->execute($request->file('font'));
 
         return redirect()
-            ->intended(route('fonts.index'))
+            ->intended(route('settings.index'))
             ->with('status', 'font uploaded.');
     }
 
     public function destroy(Request $request): RedirectResponse
     {
-        if (Storage::disk('local')->exists($request->input('filename'))) {
-            Storage::disk('local')->delete($request->input('filename'));
+        if (Storage::disk('local')->exists('fonts/' . $request->input('filename'))) {
+            Storage::disk('local')->delete('fonts/' . $request->input('filename'));
         }
 
         return redirect()
-            ->intended(route('fonts.index'))
+            ->intended(route('settings.index'))
             ->with('status', 'font deleted.');
     }
 }
