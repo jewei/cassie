@@ -51,7 +51,7 @@ const destroy = (font) => {
                                     Fonts
                                 </h1>
                                 <p class="mt-2 text-sm text-gray-700">
-                                    A list of all the uploaded fonts that can be use in certificate PDF. (TTF type only)
+                                    A list of all the uploaded fonts that can be use in certificate PDF. (TTF mime type only)
                                 </p>
                             </div>
                             <div class="mt-4 sm:mt-0 sm:ml-16 sm:flex-none">

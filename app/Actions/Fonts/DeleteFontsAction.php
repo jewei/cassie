@@ -6,14 +6,10 @@ use Illuminate\Support\Facades\Storage;
 
 final readonly class DeleteFontsAction
 {
-    /**
-     * @return array<int, string>
-     */
-    public function execute(): array
+    public function execute(string $filename): void
     {
-        return array_map(
-            fn ($font) => ltrim($font, 'fonts/'),
-            Storage::disk('local')->files('fonts')
-        );
+        if (Storage::disk('local')->exists('fonts/' . $filename)) {
+            Storage::disk('local')->delete('fonts/' . $filename);
+        }
     }
 }

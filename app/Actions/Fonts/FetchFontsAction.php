@@ -12,7 +12,7 @@ final readonly class FetchFontsAction
     public function execute(): array
     {
         return array_map(
-            fn ($font) => ltrim($font, 'fonts/'),
+            fn (string $font) => ltrim($font, 'fonts/'),
             Storage::disk('local')->files('fonts')
         );
     }
