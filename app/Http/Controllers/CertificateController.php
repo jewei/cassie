@@ -24,7 +24,11 @@ class CertificateController extends Controller
 
         return Inertia::render('Participant/Form', [
             'template' => $template,
-            'datatext' => trim($participants->reduce(fn ($carry, $item) => $carry . PHP_EOL . $item->name . ', ' . $item->email)),
+            'datatext' => trim(
+                $participants->reduce(
+                    fn (string $carry, Certificate $item) => $carry . PHP_EOL . $item->name . ', ' . $item->email
+                )
+            ),
         ]);
     }
 
