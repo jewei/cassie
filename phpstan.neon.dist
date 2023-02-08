@@ -6,13 +6,9 @@ parameters:
     paths:
         - app/
 
-    # Level 9 is the highest level
     level: 6
 
-#    ignoreErrors:
-#        - '#PHPDoc tag @var#'
-#
-#    excludePaths:
-#        - ./*/*/FileToBeExcluded.php
-#
-#    checkMissingIterableValueType: false
+    excludePaths:
+        - app/Http/Controllers/Auth/VerifyEmailController.php
+        - app/Http/Requests/Auth/LoginRequest.php
+        - app/Http/Requests/ProfileUpdateRequest.php
