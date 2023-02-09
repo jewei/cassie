@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Storage;
 final readonly class SaveFontAction
 {
     /**
-     * @param null|array<int, UploadedFile>|UploadedFile $file
+     * @param  null|array<int, UploadedFile>|UploadedFile  $file
      */
     public function execute($file): void
     {

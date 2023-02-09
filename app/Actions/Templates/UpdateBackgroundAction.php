@@ -22,7 +22,7 @@ final readonly class UpdateBackgroundAction
         $template->image = (string) Storage::putFile('backgrounds', $image);
 
         $parts = explode(DIRECTORY_SEPARATOR, $template->image);
-        $template->thumbnail = 'thumbnails/' . last($parts);
+        $template->thumbnail = 'thumbnails/'.last($parts);
 
         Storage::disk('public')->put(
             $template->thumbnail,

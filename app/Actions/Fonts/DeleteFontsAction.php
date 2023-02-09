@@ -12,8 +12,8 @@ final readonly class DeleteFontsAction
             return;
         }
 
-        if (Storage::disk('local')->exists('fonts/' . $filename)) {
-            Storage::disk('local')->delete('fonts/' . $filename);
+        if (Storage::disk('local')->exists('fonts/'.$filename)) {
+            Storage::disk('local')->delete('fonts/'.$filename);
         }
     }
 }

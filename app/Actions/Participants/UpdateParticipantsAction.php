@@ -17,7 +17,7 @@ final readonly class UpdateParticipantsAction
     }
 
     /**
-     * @param array<string, string> $input
+     * @param  array<string, string>  $input
      */
     public function execute(Template $template, array $input): void
     {
@@ -38,7 +38,7 @@ final readonly class UpdateParticipantsAction
                 try {
                     $this->saveParticipant($template, ...array_map('trim', str_getcsv($line)));
                 } catch (\Throwable) {
-                    throw new InvalidParticipantException('Invalid participant: ' . $line);
+                    throw new InvalidParticipantException('Invalid participant: '.$line);
                 }
             }
         });

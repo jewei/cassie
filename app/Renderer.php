@@ -60,20 +60,19 @@ final readonly class Renderer
     }
 
     /**
-     * @param ArrayObject<string, string> $properties
+     * @param  ArrayObject<string, string>  $properties
      */
     private function getNameImageData(string $name, ArrayObject $properties): string
     {
-        $paperFormat = '\App\Enums\\' . $properties['format'];
+        $paperFormat = '\App\Enums\\'.$properties['format'];
 
         [$paperWidth, $paperHeight] = $properties['orientation'] === 'L'
             ? [$paperFormat::HEIGHT->value, $paperFormat::WIDTH->value]
             : [$paperFormat::WIDTH->value, $paperFormat::HEIGHT->value];
 
-        $font = Storage::disk('local')->exists('fonts' . DIRECTORY_SEPARATOR . $properties['font'])
-            ? Storage::disk('local')->path('fonts' . DIRECTORY_SEPARATOR . $properties['font'])
-            : throw new FontNotFoundException('Font not found: ' . $properties['font']);
-
+        $font = Storage::disk('local')->exists('fonts'.DIRECTORY_SEPARATOR.$properties['font'])
+            ? Storage::disk('local')->path('fonts'.DIRECTORY_SEPARATOR.$properties['font'])
+            : throw new FontNotFoundException('Font not found: '.$properties['font']);
         [$lowerLeftX,, $lowerRightX, $lowerRightY,, $upperRightY] = imagettfbbox((float) $properties['font_size'], 0, $font, $name) ?: [0, 0, 0, 0]; // https://bugs.php.net/bug.php?id=81334
 
         [$red, $green, $blue] = str_split($properties['font_colour'] ?? 'FFFFFF', 2);
@@ -99,6 +98,6 @@ final readonly class Renderer
         ob_start();
         imagepng($image);
 
-        return '@' . ob_get_clean();
+        return '@'.ob_get_clean();
     }
 }

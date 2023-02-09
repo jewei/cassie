@@ -26,7 +26,7 @@ class CertificateController extends Controller
             'template' => $template,
             'datatext' => trim(
                 $participants->reduce(
-                    fn (string $carry, Certificate $item) => $carry . PHP_EOL . $item->name . ', ' . $item->email
+                    fn (string $carry, Certificate $item) => $carry.PHP_EOL.$item->name.', '.$item->email
                 )
             ),
         ]);
@@ -43,7 +43,7 @@ class CertificateController extends Controller
                 'Cache-Control' => 'no-cache, must-revalidate',
             ])
             : response()->file($certificate->path, [
-                'Content-Disposition' => 'filename="' . $certificate->download_filename . '"',
+                'Content-Disposition' => 'filename="'.$certificate->download_filename.'"',
             ]);
     }
 

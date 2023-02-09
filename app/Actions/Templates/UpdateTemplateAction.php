@@ -14,7 +14,7 @@ final readonly class UpdateTemplateAction
     }
 
     /**
-     * @param array<string, string|UploadedFile> $input
+     * @param  array<string, string|UploadedFile>  $input
      */
     public function execute(Template $template, array $input): void
     {

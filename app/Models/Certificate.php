@@ -93,7 +93,7 @@ class Certificate extends Model
     protected function filename(): Attribute
     {
         return Attribute::make(
-            get: fn () => 'certificates' . DIRECTORY_SEPARATOR . $this->uuid . '.pdf'
+            get: fn () => 'certificates'.DIRECTORY_SEPARATOR.$this->uuid.'.pdf'
         );
     }
 
@@ -103,7 +103,7 @@ class Certificate extends Model
     protected function downloadFilename(): Attribute
     {
         return Attribute::make(
-            get: fn () => $this->template->properties['title'] . ' - ' . $this->name . '.pdf'
+            get: fn () => $this->template->properties['title'].' - '.$this->name.'.pdf'
         );
     }
 }
