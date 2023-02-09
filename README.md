@@ -34,7 +34,7 @@ cp .env.example .env
 ./vendor/bin/sail pest
 
 # Fix coding styles.
-./vendor/bin/pint
+./vendor/bin/sail pint
 
 # Build.
 ./vendor/bin/sail npm run build
