@@ -24,19 +24,19 @@ cp .env.example .env
 ## Development
 
 ```
-Run dev.
+# Run dev.
 ./vendor/bin/sail npm run dev
 
-Static analysis.
+# Static analysis.
 ./vendor/bin/phpstan analyse --memory-limit=2G
 
-Tests.
+# Tests.
 ./vendor/bin/sail pest
 
-Fix coding styles.
+# Fix coding styles.
 ./vendor/bin/pint
 
-Build.
+# Build.
 ./vendor/bin/sail npm run build
 ```
 
