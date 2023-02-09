@@ -10,6 +10,11 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Storage;
 
+/**
+ * @property string $name
+ * @property string $image
+ * @property string $thumbnail
+ */
 class Template extends Model
 {
     use HasFactory;
@@ -46,7 +51,7 @@ class Template extends Model
     protected function updatedAt(): Attribute
     {
         return Attribute::make(
-            get: fn ($value) => Carbon::parse($value)->diffForHumans(),
+            get: fn ($value) => Carbon::parse((string) $value)->diffForHumans(),
         );
     }
 

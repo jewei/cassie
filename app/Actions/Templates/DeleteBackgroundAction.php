@@ -17,8 +17,8 @@ final readonly class DeleteBackgroundAction
             Storage::disk('public')->delete($template->thumbnail);
         }
 
-        $template->image = null;
-        $template->thumbnail = null;
+        $template->image = '';
+        $template->thumbnail = '';
 
         $template->save();
     }

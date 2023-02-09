@@ -14,15 +14,16 @@ final readonly class Renderer
     {
         $start = microtime(true);
 
+        /** @var ArrayObject<string, string> $properties */
         $properties = $template->properties;
 
         $pdf = new \TCPDF(
-            orientation: $properties['orientation'],
-            unit: $properties['unit'],
+            orientation: $properties['orientation'] ?? 'L',
+            unit: $properties['unit'] ?? 'mm',
             format: $properties['format'],
         );
 
-        $pdf->setTitle($properties['title']);
+        $pdf->setTitle($properties['title'] ?? '');
         $pdf->setSubject($properties['subject'] ?? '');
         $pdf->setAuthor($properties['author'] ?? '');
         $pdf->setCreator($properties['creator'] ?? '');
@@ -31,7 +32,7 @@ final readonly class Renderer
         $pdf->setAutoPageBreak(false, 0);
 
         $pdf->AddPage(
-            orientation: $properties['orientation'],
+            orientation: $properties['orientation'] ?? 'L',
             format: $properties['format'],
             keepmargins: true,
             tocpage: false
@@ -59,7 +60,7 @@ final readonly class Renderer
     }
 
     /**
-     * @param ArrayObject<int, string> $properties
+     * @param ArrayObject<string, string> $properties
      */
     private function getNameImageData(string $name, ArrayObject $properties): string
     {
@@ -73,15 +74,16 @@ final readonly class Renderer
             ? Storage::disk('local')->path('fonts' . DIRECTORY_SEPARATOR . $properties['font'])
             : throw new FontNotFoundException('Font not found: ' . $properties['font']);
 
-        [$lowerLeftX,, $lowerRightX, $lowerRightY,, $upperRightY] = imagettfbbox((float) $properties['font_size'], 0, $font, $name); // https://bugs.php.net/bug.php?id=81334
+        [$lowerLeftX,, $lowerRightX, $lowerRightY,, $upperRightY] = imagettfbbox((float) $properties['font_size'], 0, $font, $name) ?: [0, 0, 0, 0]; // https://bugs.php.net/bug.php?id=81334
 
-        [$red, $green, $blue] = str_split($properties['font_colour'], 2);
+        [$red, $green, $blue] = str_split($properties['font_colour'] ?? 'FFFFFF', 2);
 
+        /** @var \GdImage $image */
         $image = imagecreatetruecolor($paperWidth, $paperHeight);
         imagesavealpha($image, true);
 
-        $transparent = imagecolorallocatealpha($image, 0, 0, 0, 127);
-        imagefill($image, 0, 0, $transparent);
+        $transparent = imagecolorallocatealpha(image: $image, red: 0, green: 0, blue: 0, alpha: 127);
+        imagefill(image: $image, x: 0, y: 0, color: (int) $transparent);
 
         imagettftext(
             image: $image,
@@ -89,7 +91,7 @@ final readonly class Renderer
             angle: 0,
             x: (int) ($paperWidth - $lowerRightX + $lowerLeftX + $properties['x_offset']) / 2,
             y: (int) ($paperHeight - $lowerRightY + $upperRightY + $properties['y_offset']) / 2,
-            color: imagecolorallocate($image, hexdec($red), hexdec($green), hexdec($blue)),
+            color: (int) imagecolorallocate(image: $image, red: (int) hexdec($red), green: (int) hexdec($green), blue: (int) hexdec($blue)),
             font_filename: $font,
             text: $name
         );

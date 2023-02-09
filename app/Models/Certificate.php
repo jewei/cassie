@@ -10,12 +10,13 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Facades\Storage;
 
 /**
- * @property string $uuid
- * @property string $file_exists
- * @property string $path
- * @property string $disk
- * @property string $filename
- * @property string $download_filename
+ * @property string   $uuid
+ * @property string   $file_exists
+ * @property string   $path
+ * @property string   $disk
+ * @property string   $filename
+ * @property string   $download_filename
+ * @property Template $template
  */
 class Certificate extends Model
 {

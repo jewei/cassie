@@ -32,7 +32,7 @@ final readonly class UpdateTemplateAction
 
         $template->save();
 
-        if (! empty($input['image'])) {
+        if (! empty($input['image']) && $input['image'] instanceof UploadedFile) {
             $this->updateBackgroundAction->execute($template, $input['image']);
         }
     }

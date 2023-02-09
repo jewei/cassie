@@ -29,7 +29,7 @@ class FontController extends Controller
             'filename' => ['required', 'string', 'max:255'],
         ])->validate();
 
-        $action->execute($request->input('filename'));
+        $action->execute((string) $request->input('filename'));
 
         return redirect()
             ->intended(route('settings.index'))

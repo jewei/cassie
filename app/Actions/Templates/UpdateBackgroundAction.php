@@ -19,7 +19,7 @@ final readonly class UpdateBackgroundAction
     {
         $this->deleteBackgroundAction->execute($template);
 
-        $template->image = Storage::putFile('backgrounds', $image);
+        $template->image = (string) Storage::putFile('backgrounds', $image);
 
         $parts = explode(DIRECTORY_SEPARATOR, $template->image);
         $template->thumbnail = 'thumbnails/' . last($parts);
