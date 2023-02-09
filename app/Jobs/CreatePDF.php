@@ -20,8 +20,8 @@ final class CreatePDF implements ShouldQueue, ShouldBeUnique
     use SerializesModels;
 
     public function __construct(
-        private Template $template,
-        private Certificate $certificate,
+        private readonly Template $template,
+        private readonly Certificate $certificate,
     ) {
     }
 
