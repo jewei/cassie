@@ -2,6 +2,12 @@
 
 Cassie Lite is the light version of Cassie, certificate as a service. https://jewei.net/cassie/
 
+## Tech Stack
+
+**VILT** Stack = Vue.js, Inertia.js, Laravel, Tailwind CSS.
+
+Development environment is managed by Laravel Sail.
+
 ## Setup
 
 ```
