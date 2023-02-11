@@ -58,15 +58,24 @@ class Handler extends ExceptionHandler
     {
         /** @var \Illuminate\Http\Response $response */
         $response = parent::render($request, $e);
-        $status = $response->status();
 
-        return ! in_array($status, [500, 503, 404, 403])
-            ? $response
-            : Inertia::render('Error/Error', [
-                'status' => $status,
-                'statusText' => $this->shortErrorMessage($status),
-                'message' => $this->friendlyErrorMessages($status),
-            ]);
+        return $this->shouldReturnCustomErrorPage($code = $response->status())
+            ? $this->getCustomErrorPage($code)
+            : $response;
+    }
+
+    private function shouldReturnCustomErrorPage(int $code): bool
+    {
+        return ! app()->hasDebugModeEnabled() && in_array($code, [500, 503, 404, 403]);
+    }
+
+    private function getCustomErrorPage(int $code): InertiaResponse
+    {
+        return Inertia::render('Error/Error', [
+            'status' => $code,
+            'statusText' => $this->shortErrorMessage($code),
+            'message' => $this->friendlyErrorMessages($code),
+        ]);
     }
 
     private function shortErrorMessage(int $code): string
