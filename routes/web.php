@@ -18,7 +18,7 @@ Route::get('/c/{certificate:uuid}', [CertificateController::class, 'show']);
 Route::redirect('/', '/templates');
 
 Route::middleware('auth')->group(function () {
-    Route::resource('templates', TemplateController::class);
+    Route::resource('templates', TemplateController::class)->except('show');
 
     Route::resource('templates.certificates', CertificateController::class)->only(['index', 'show', 'create', 'store']);
 

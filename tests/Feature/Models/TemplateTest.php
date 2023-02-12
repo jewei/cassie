@@ -1,7 +1,12 @@
 <?php
 
-test('example', function () {
-    $response = $this->get('/');
+use App\Models\Certificate;
+use App\Models\Template;
 
-    $response->assertStatus(200);
+it('can create models with relationships', function () {
+    $template = Template::factory()
+        ->has(Certificate::factory()->count(5))
+        ->create();
+
+    expect($template->certificates)->toHaveCount(5);
 });

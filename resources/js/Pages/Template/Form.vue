@@ -82,7 +82,7 @@ const destroy = () => {
     <AuthenticatedLayout>
         <template #header>
             <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-                Edit Template
+                {{ props.template.id ? 'Edit Template' : 'Create Template' }}
             </h2>
         </template>
 
