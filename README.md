@@ -1,10 +1,12 @@
 # Cassie Lite
 
-Cassie Lite is the light version of Cassie, certificate as a service. https://jewei.net/cassie/
+Cassie Lite is the light version of Cassie, certificate as a service.
+
+Screenshots available at https://jewei.net/cassie/
 
 ## Technical Overview
 
-Stack: **VILT** Vue.js, Inertia.js, Laravel, Tailwind CSS.
+Stack: **VILT** - Vue.js, Inertia.js, Laravel, Tailwind CSS.
 
 Strong typing supported by PHPStan.
 
