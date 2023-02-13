@@ -1143,16 +1143,17 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "67c19a72ca73b0efa3a744cbe72e34217b9a58b5"
+                "reference": "88b703b78aa61f37944a0b19fe65d75437a9b0a6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/67c19a72ca73b0efa3a744cbe72e34217b9a58b5",
-                "reference": "67c19a72ca73b0efa3a744cbe72e34217b9a58b5",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/88b703b78aa61f37944a0b19fe65d75437a9b0a6",
+                "reference": "88b703b78aa61f37944a0b19fe65d75437a9b0a6",
                 "shasum": ""
             },
             "require": {
                 "brick/math": "^0.9.3|^0.10.2|^0.11",
+                "composer-runtime-api": "^2.2",
                 "doctrine/inflector": "^2.0.5",
                 "dragonmantank/cron-expression": "^3.3.2",
                 "egulias/email-validator": "^3.2.1|^4.0",
@@ -1334,7 +1335,7 @@
                 "issues": "https://github.com/laravel/framework/issues",
                 "source": "https://github.com/laravel/framework"
             },
-            "time": "2023-02-10T15:25:48+00:00"
+            "time": "2023-02-13T15:13:07+00:00"
         },
         {
             "name": "laravel/sanctum",
