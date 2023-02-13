@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Actions\Fonts\FetchFontsAction;
+use App\Actions\Pdf\RegenerateTemplatePdfsAction;
 use App\Actions\Templates\DeleteTemplateAction;
 use App\Actions\Templates\FetchTemplatesAction;
 use App\Actions\Templates\UpdateTemplateAction;
@@ -58,5 +59,12 @@ class TemplateController extends Controller
         $action->execute($template);
 
         return redirect()->intended(route('templates.index'))->with('status', 'template deleted.');
+    }
+
+    public function regenerate(Template $template, RegenerateTemplatePdfsAction $action): RedirectResponse
+    {
+        $action->execute($template);
+
+        return redirect()->intended(route('templates.certificates.index', $template))->with('status', 'template deleted.');
     }
 }

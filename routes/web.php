@@ -24,6 +24,7 @@ Route::get('/c/{certificate:uuid}', function (Certificate $certificate) {
 Route::redirect('/', '/templates');
 
 Route::middleware('auth')->group(function () {
+    Route::post('templates/{template}/regenerate', [TemplateController::class, 'regenerate'])->name('templates.regenerate');
     Route::resource('templates', TemplateController::class)->except('show');
 
     Route::get('exports/{template}/participants', [ExportController::class, 'participants'])->name('exports.participants');

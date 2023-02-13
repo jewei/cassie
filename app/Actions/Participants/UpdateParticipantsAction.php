@@ -3,7 +3,7 @@
 namespace App\Actions\Participants;
 
 use App\Actions\Certificates\DeleteCertificateAction;
-use App\Actions\Certificates\RenderCertificateAction;
+use App\Actions\Pdf\RegenerateTemplatePdfsAction;
 use App\Models\Template;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
@@ -12,7 +12,7 @@ final readonly class UpdateParticipantsAction
 {
     public function __construct(
         private DeleteCertificateAction $deleteCertificateAction,
-        private RenderCertificateAction $renderCertificateAction,
+        private RegenerateTemplatePdfsAction $regenerateTemplatePdfsAction,
     ) {
     }
 
@@ -31,8 +31,6 @@ final readonly class UpdateParticipantsAction
             $this->deleteCertificateAction->execute($certificate);
         });
 
-        $template->fresh();
-
         DB::transaction(function () use ($lines, $template) {
             foreach ($lines as $line) {
                 try {
@@ -42,15 +40,16 @@ final readonly class UpdateParticipantsAction
                 }
             }
         });
+
+        $template->refresh();
+        $this->regenerateTemplatePdfsAction->execute($template);
     }
 
     private function saveParticipant(Template $template, string $name, string $email): void
     {
-        $certificate = $template->certificates()->create([
+        $template->certificates()->create([
             'name' => $name,
             'email' => $email,
         ]);
-
-        $this->renderCertificateAction->execute($template, $certificate);
     }
 }
