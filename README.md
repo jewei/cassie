@@ -1,21 +1,15 @@
 # Cassie Lite
 
-Cassie Lite is the light version of Cassie, certificate as a service.
-
-Screenshots available at https://jewei.net/cassie/
+Easy and simple app to manage and generate PDF certificates. Screenshots available at https://jewei.net/cassie/
 
 
 ## Technical Overview
 
-Stack: **VILT** - Vue.js, Inertia.js, Laravel, Tailwind CSS.
-
-Strong static typing supported by PHPStan.
-
-Development environment is managed by Laravel Sail.
-
-Testing Framework covered by Pest.
-
-PDF generations are async tasks running by queue. 
+* Tech stack: **VILT** - Vue.js, Inertia.js, Laravel and Tailwind CSS.
+* Strong static typing supported by PHPStan.
+* Development environment is managed by Laravel Sail.
+* Testing Framework covered by Pest.
+* PDF generations are async tasks running by queue. 
 
 
 ## Setup
@@ -45,7 +39,7 @@ To async process queues in the background:
 1. Set [queue driver](https://laravel.com/docs/10.x/queues#driver-prerequisites) `QUEUE_CONNECTION` accordingly.
 2. Set and [run the queue worker](https://laravel.com/docs/10.x/queues#running-the-queue-worker).
 
-To not use async feature, set queue driver to `sync`.
+To not use async feature, set `QUEUE_CONNECTION` to `sync`.
 
 
 ## Development
