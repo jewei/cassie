@@ -19,10 +19,11 @@ class TemplateController extends Controller
         return Inertia::render('Template/Index', ['templates' => $action->execute()]);
     }
 
-    public function create(): InertiaResponse
+    public function create(FetchFontsAction $action): InertiaResponse
     {
         return Inertia::render('Template/Form', [
             'template' => new Template(),
+            'paperFonts' => $action->execute(),
             'maxUploadSize' => min(ini_get('post_max_size'), ini_get('upload_max_filesize')),
             'mode' => 'create',
         ]);
