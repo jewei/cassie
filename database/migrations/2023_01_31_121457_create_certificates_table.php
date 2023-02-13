@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Template;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -13,7 +14,7 @@ return new class() extends Migration
     {
         Schema::create('certificates', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('template_id');
+            $table->foreignIdFor(Template::class)->constrained();
             $table->uuid()->index();
             $table->string('name');
             $table->string('email')->nullable();
