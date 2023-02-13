@@ -4,17 +4,19 @@ Cassie Lite is the light version of Cassie, certificate as a service.
 
 Screenshots available at https://jewei.net/cassie/
 
+
 ## Technical Overview
 
 Stack: **VILT** - Vue.js, Inertia.js, Laravel, Tailwind CSS.
 
-Strong typing supported by PHPStan.
+Strong static typing supported by PHPStan.
 
 Development environment is managed by Laravel Sail.
 
-Testing Framework with Pest.
+Testing Framework covered by Pest.
 
-PDF generations are queues processed in the background, please set [queue driver](https://laravel.com/docs/10.x/queues#driver-prerequisites) `QUEUE_CONNECTION` accordingly.
+PDF generations are async tasks running by queue. 
+
 
 ## Setup
 
@@ -35,6 +37,17 @@ cp .env.example .env
 ./vendor/bin/sail artisan migrate:fresh --seed
 ```
 
+
+### Queues Setting
+
+To async process queues in the background:
+
+1. Set [queue driver](https://laravel.com/docs/10.x/queues#driver-prerequisites) `QUEUE_CONNECTION` accordingly.
+2. Set and [run the queue worker](https://laravel.com/docs/10.x/queues#running-the-queue-worker).
+
+To not use async feature, set queue driver to `sync`.
+
+
 ## Development
 
 ```
@@ -53,6 +66,7 @@ cp .env.example .env
 # Build.
 ./vendor/bin/sail npm run build
 ```
+
 
 ## Application Structure
 
