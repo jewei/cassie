@@ -37,7 +37,7 @@ cp .env.example .env
 To async process queues in the background:
 
 1. Set [queue driver](https://laravel.com/docs/10.x/queues#driver-prerequisites) `QUEUE_CONNECTION` accordingly.
-2. Set and [run the queue worker](https://laravel.com/docs/10.x/queues#running-the-queue-worker).
+2. Set and [run the queue worker](https://laravel.com/docs/10.x/queues#running-the-queue-worker). E.g. `sail artisan queue:work`
 
 To not use async feature, set `QUEUE_CONNECTION` to `sync`.
 
