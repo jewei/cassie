@@ -2,7 +2,7 @@
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
 import { Head, Link, router } from "@inertiajs/vue3";
 
-defineProps({
+const props = defineProps({
     template: Object,
     participants: Array,
 });
@@ -34,11 +34,16 @@ defineProps({
                             <div class="mt-4 sm:mt-0 sm:ml-16 sm:flex-none">
                                 <Link
                                     :href="route('templates.index')"
-                                    class="mx-4 font-medium text-gray-500 hover:text-gray-700"
+                                    class="font-medium text-gray-500 hover:text-gray-700"
                                     >Back
                                 </Link>
+                                <a
+                                    :href="route('exports.participants', [props.template.id])"
+                                    class="mx-2 inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                                    >Export
+                                </a>
                                 <Link
-                                    :href="route('templates.certificates.create', template)"
+                                    :href="route('templates.certificates.create', props.template)"
                                     type="button"
                                     class="inline-flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:w-auto"
                                 >
@@ -66,7 +71,7 @@ defineProps({
                                             </thead>
                                             <tbody class="bg-white">
                                                 <tr
-                                                    v-for="(participant, idx) in participants"
+                                                    v-for="(participant, idx) in props.participants"
                                                     :key="participant.id"
                                                     :class="idx % 2 === 0 ? undefined : 'bg-gray-50'"
                                                 >
@@ -79,14 +84,14 @@ defineProps({
                                                     <td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
                                                         <a
                                                             v-if="participant.rendered_at"
-                                                            :href="route('templates.certificates.show', [template.id, participant.id])"
+                                                            :href="route('templates.certificates.show', [props.template.id, participant.id])"
                                                             class="text-indigo-600 hover:text-indigo-900"
                                                             preserve-scroll
                                                             >View
                                                         </a>
                                                         <a 
                                                             v-if="participant.rendered_at"
-                                                            :href="route('templates.certificates.show', [template.id, participant.id]) + '?download=1'"
+                                                            :href="route('templates.certificates.show', [props.template.id, participant.id]) + '?download=1'"
                                                             class="ml-2 text-indigo-600 hover:text-indigo-900"
                                                             preserve-scroll
                                                             >Download
