@@ -69,7 +69,7 @@ const exportMenuitems = [
                                                 class="absolute right-0 z-10 mt-2 -mr-1 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
                                                 <div class="py-1">
                                                     <MenuItem v-for="item in LinkMenuitems" :key="item.name" v-slot="{ active }">
-                                                        <Link :href="item.href" :method="item.method" as="button" :class="[active ? 'bg-gray-100 text-gray-900' : 'text-gray-700', 'block px-4 py-2 text-sm']">{{item.name}}</Link>
+                                                        <Link :href="item.href" :method="item.method" as="button" :class="[active ? 'bg-gray-100 text-gray-900' : 'text-gray-700', 'block px-4 py-2 text-sm w-full text-left']">{{item.name}}</Link>
                                                     </MenuItem>
                                                     <MenuItem v-for="item in exportMenuitems" :key="item.name" v-slot="{ active }">
                                                         <a :href="item.href" :class="[active ? 'bg-gray-100 text-gray-900' : 'text-gray-700', 'block px-4 py-2 text-sm']">{{item.name}}</a>
