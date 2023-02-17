@@ -4,13 +4,14 @@ use App\Http\Controllers\CertificateController;
 use App\Http\Controllers\ExportController;
 use App\Http\Controllers\FontController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\SearchCertificateController;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\TemplateController;
 use App\Models\Certificate;
 use Illuminate\Support\Facades\Route;
 
 /**
- * Public facing.
+ * Hashed URL to see certificate.
  */
 Route::get('/c/{certificate:uuid}', function (Certificate $certificate) {
     return response()->file($certificate->path, [
@@ -19,10 +20,18 @@ Route::get('/c/{certificate:uuid}', function (Certificate $certificate) {
 })->name('public.show-certificate');
 
 /**
+ * Homepage to search certificates.
+ */
+Route::controller(SearchCertificateController::class)
+    ->name('search.')
+    ->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::post('/', 'search')->name('search');
+    });
+
+/**
  * Admin Dashboard.
  */
-Route::redirect('/', '/templates');
-
 Route::middleware('auth')->group(function () {
     Route::post('templates/{template}/regenerate', [TemplateController::class, 'regenerate'])->name('templates.regenerate');
     Route::resource('templates', TemplateController::class)->except('show');
