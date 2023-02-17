@@ -21,11 +21,9 @@
         "laravel/pint": "^1.0",
         "laravel/sail": "^1.18",
         "mockery/mockery": "^1.4.4",
-        "nunomaduro/collision": "^6.1",
         "nunomaduro/larastan": "^2.0",
         "pestphp/pest": "^1.22",
         "pestphp/pest-plugin-laravel": "^1.4",
-        "phpunit/phpunit": "^9.5.10",
         "spatie/laravel-ignition": "^2.0"
     },
     "autoload": {
@@ -65,9 +63,6 @@
         ]
     },
     "extra": {
-        "branch-alias": {
-            "dev-master": "10.x-dev"
-        },
         "laravel": {
             "dont-discover": []
         }
@@ -77,9 +72,10 @@
         "preferred-install": "dist",
         "sort-packages": true,
         "allow-plugins": {
-            "pestphp/pest-plugin": true
+            "pestphp/pest-plugin": true,
+            "php-http/discovery": true
         }
     },
-    "minimum-stability": "dev",
+    "minimum-stability": "stable",
     "prefer-stable": true
 }
