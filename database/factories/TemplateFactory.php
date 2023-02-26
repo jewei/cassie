@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Template;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 
@@ -37,5 +38,17 @@ class TemplateFactory extends Factory
                 'y_offset' => -150,
             ],
         ];
+    }
+
+    public function configure()
+    {
+        return $this->afterCreating(function (Template $template) {
+            $background = fake()->image(storage_path('app/backgrounds'), 3508, 2480, null, false);
+            $thumbnail = fake()->image(storage_path('app/public/thumbnails'), 300, 200, null, false);
+
+            $template->image = 'backgrounds/'.$background;
+            $template->thumbnail = 'thumbnails/'.$thumbnail;
+            $template->save();
+        });
     }
 }
