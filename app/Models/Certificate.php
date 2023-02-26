@@ -42,6 +42,13 @@ class Certificate extends Model
     ];
 
     /**
+     * @var array<string>
+     */
+    protected $with = [
+        'template',
+    ];
+
+    /**
      * @return BelongsTo<Template, Certificate>
      */
     public function template(): BelongsTo
