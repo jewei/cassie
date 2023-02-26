@@ -40,7 +40,7 @@ class TemplateFactory extends Factory
         ];
     }
 
-    public function configure()
+    public function configure(): static
     {
         return $this->afterCreating(function (Template $template) {
             $background = fake()->image(storage_path('app/backgrounds'), 3508, 2480, null, false);
