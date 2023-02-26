@@ -25,8 +25,8 @@ class TemplateFactory extends Factory
             'properties' => [
                 'title' => Str::title(fake()->words(rand(3, 5), true)),
                 'subject' => Str::title(fake()->words(rand(3, 5), true)),
-                'author' => 'FrogAsia Sdn. Bhd.',
-                'creator' => 'FrogAsia Sdn. Bhd.',
+                'author' => 'Cassie',
+                'creator' => 'Cassie',
                 'keywords' => fake()->words(rand(3, 5), true),
                 'orientation' => 'L',
                 'unit' => 'mm',

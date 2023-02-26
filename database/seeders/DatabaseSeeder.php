@@ -22,12 +22,7 @@ class DatabaseSeeder extends Seeder
 
         User::factory()->create([
             'name' => 'Super Admin',
-            'email' => 'A.Cassie@Yes.My',
-        ]);
-
-        User::factory()->create([
-            'name' => 'Super Tester',
-            'email' => 'A.Cassie@portaldev.ytlcomms.my',
+            'email' => 'admin@example.com',
         ]);
 
         Template::factory()

@@ -21,8 +21,8 @@ const form = useForm({
     image: props.template.properties?.image ?? null,
     properties: props.template.properties ?? {
         title: null,
-        author: "FrogAsia Sdn. Bhd.",
-        creator: "FrogAsia Sdn. Bhd.",
+        author: "Cassie",
+        creator: "Cassie",
         keywords: null,
         orientation: "L",
         format: "A4",
