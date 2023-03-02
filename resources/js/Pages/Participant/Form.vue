@@ -1,10 +1,10 @@
 <script setup>
-import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
-import InputError from "@/Components/InputError.vue";
-import autosize from "autosize";
-import { onBeforeUnmount, ref } from "vue";
-import { Head, Link, useForm } from "@inertiajs/vue3";
-import { onMounted } from "vue";
+import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
+import InputError from '@/Components/InputError.vue';
+import autosize from 'autosize';
+import { onBeforeUnmount, ref } from 'vue';
+import { Head, Link, useForm } from '@inertiajs/vue3';
+import { onMounted } from 'vue';
 
 const props = defineProps({
     template: Object,
@@ -17,7 +17,7 @@ const form = useForm({
 
 const textarea = ref(null);
 
-const submit = () => form.post(route("templates.certificates.store", props.template.id));
+const submit = () => form.post(route('templates.certificates.store', props.template.id));
 
 onMounted(() => autosize(textarea.value));
 onBeforeUnmount(() => autosize.destroy(textarea.value));
@@ -28,28 +28,20 @@ onBeforeUnmount(() => autosize.destroy(textarea.value));
 
     <AuthenticatedLayout>
         <template #header>
-            <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-                Participant
-            </h2>
+            <h2 class="text-xl font-semibold leading-tight text-gray-800 dark:text-gray-200">Participant</h2>
         </template>
 
         <div class="py-12">
-            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                <div class="bg-white dark:bg-gray-100 overflow-hidden shadow-sm sm:rounded-lg py-10">
-                    <form
-                        @submit.prevent="submit"
-                        class="space-y-8 divide-y divide-gray-200"
-                    >
+            <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
+                <div class="overflow-hidden bg-white py-10 shadow-sm dark:bg-gray-100 sm:rounded-lg">
+                    <form @submit.prevent="submit" class="space-y-8 divide-y divide-gray-200">
                         <div class="px-4 sm:px-6 lg:px-8">
                             <div class="sm:flex sm:items-center">
                                 <div class="sm:flex-auto">
-                                    <h1 class="text-xl font-semibold text-gray-900">
-                                        Participants
-                                    </h1>
+                                    <h1 class="text-xl font-semibold text-gray-900">Participants</h1>
                                     <p class="mt-2 text-sm text-gray-700">
-                                        A list of all the certificate
-                                        participants and their details in comma
-                                        seperated format.
+                                        A list of all the certificate participants and their details in comma seperated
+                                        format.
                                     </p>
                                 </div>
                             </div>
@@ -59,14 +51,11 @@ onBeforeUnmount(() => autosize.destroy(textarea.value));
                                     v-model="form.datatext"
                                     placeholder="John Doe, john.doe@example.com
 Will Smith, will.smith@example.com"
-                                    class="block w-full text-sm rounded-md"
+                                    class="block w-full rounded-md text-sm"
                                 ></textarea>
-                                <InputError
-                                    class="mt-2"
-                                    :message="form.errors.datatext"
-                                />
+                                <InputError class="mt-2" :message="form.errors.datatext" />
                             </div>
-                            <div class="pt-5 flex justify-end">
+                            <div class="flex justify-end pt-5">
                                 <Link
                                     type="button"
                                     :href="route('templates.certificates.index', template)"

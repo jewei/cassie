@@ -1,6 +1,6 @@
 <script setup>
-import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
-import { Head, Link } from "@inertiajs/vue3";
+import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
+import { Head, Link } from '@inertiajs/vue3';
 
 defineProps({ templates: Array });
 </script>
@@ -10,23 +10,17 @@ defineProps({ templates: Array });
 
     <AuthenticatedLayout>
         <template #header>
-            <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight" >
-                Dashboard
-            </h2>
+            <h2 class="text-xl font-semibold leading-tight text-gray-800 dark:text-gray-200">Dashboard</h2>
         </template>
 
         <div class="py-12">
-            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                <div class="bg-white dark:bg-gray-100 overflow-hidden shadow-sm sm:rounded-lg py-10">
+            <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
+                <div class="overflow-hidden bg-white py-10 shadow-sm dark:bg-gray-100 sm:rounded-lg">
                     <div class="px-4 sm:px-6 lg:px-8">
                         <div class="sm:flex sm:items-center">
                             <div class="sm:flex-auto">
-                                <h1 class="text-xl font-semibold text-gray-900">
-                                    Templates
-                                </h1>
-                                <p class="mt-2 text-sm text-gray-700">
-                                    A list of all the certificate templates.
-                                </p>
+                                <h1 class="text-xl font-semibold text-gray-900">Templates</h1>
+                                <p class="mt-2 text-sm text-gray-700">A list of all the certificate templates.</p>
                             </div>
                             <div class="mt-4 sm:mt-0 sm:ml-16 sm:flex-none">
                                 <Link
@@ -45,15 +39,30 @@ defineProps({ templates: Array });
                                         <table class="min-w-full divide-y divide-gray-300">
                                             <thead class="bg-gray-50">
                                                 <tr>
-                                                    <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"></th>
-                                                    <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">
+                                                    <th
+                                                        scope="col"
+                                                        class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
+                                                    ></th>
+                                                    <th
+                                                        scope="col"
+                                                        class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6"
+                                                    >
                                                         Name
                                                     </th>
-                                                    <th scope="col" class="px-3 py-3.5 text-sm font-semibold text-gray-900">
+                                                    <th
+                                                        scope="col"
+                                                        class="px-3 py-3.5 text-sm font-semibold text-gray-900"
+                                                    >
                                                         Participants
                                                     </th>
-                                                    <th scope="col" class="px-3 py-3.5 text-sm font-semibold text-gray-900"></th>
-                                                    <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
+                                                    <th
+                                                        scope="col"
+                                                        class="px-3 py-3.5 text-sm font-semibold text-gray-900"
+                                                    ></th>
+                                                    <th
+                                                        scope="col"
+                                                        class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
+                                                    >
                                                         Last Update
                                                     </th>
                                                     <th scope="col" class="relative py-3.5 pl-3 pr-4 sm:pr-6">
@@ -65,32 +74,45 @@ defineProps({ templates: Array });
                                                 <tr
                                                     v-for="(template, idx) in templates"
                                                     :key="template.id"
-                                                    :class="idx % 2 === 0 ? '': 'bg-gray-50'">
+                                                    :class="idx % 2 === 0 ? '' : 'bg-gray-50'"
+                                                >
                                                     <td class="whitespace-nowrap px-3 py-4 text-right text-gray-500">
                                                         <img
                                                             :src="template.thumbnail_url"
                                                             class="h-16 w-24 object-cover"
                                                         />
                                                     </td>
-                                                    <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6">
+                                                    <td
+                                                        class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6"
+                                                    >
                                                         {{ template.name }}
                                                     </td>
-                                                    <td class="whitespace-nowrap px-3 py-4 text-center text-sm text-gray-500">
+                                                    <td
+                                                        class="whitespace-nowrap px-3 py-4 text-center text-sm text-gray-500"
+                                                    >
                                                         {{ template.certificates_count }}
                                                     </td>
-                                                    <td class="whitespace-nowrap px-3 py-4 text-left text-sm text-gray-500">
+                                                    <td
+                                                        class="whitespace-nowrap px-3 py-4 text-left text-sm text-gray-500"
+                                                    >
                                                         <Link
                                                             :href="route('templates.certificates.index', template)"
                                                             class="text-indigo-600 hover:text-indigo-900"
                                                             preserve-scroll
                                                         >
-                                                            {{ template.certificates_count > 0 ? "View participants" : "Add participants" }}
+                                                            {{
+                                                                template.certificates_count > 0
+                                                                    ? 'View participants'
+                                                                    : 'Add participants'
+                                                            }}
                                                         </Link>
                                                     </td>
                                                     <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                                                         {{ template.updated_at }}
                                                     </td>
-                                                    <td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
+                                                    <td
+                                                        class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6"
+                                                    >
                                                         <Link
                                                             :href="route('templates.edit', template)"
                                                             class="text-indigo-600 hover:text-indigo-900"
