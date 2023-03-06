@@ -40,15 +40,15 @@ class TemplateFactory extends Factory
         ];
     }
 
-    public function configure(): static
-    {
-        return $this->afterCreating(function (Template $template) {
-            $background = fake()->image(storage_path('app/backgrounds'), 3508, 2480, null, false);
-            $thumbnail = fake()->image(storage_path('app/public/thumbnails'), 300, 200, null, false);
+    // public function configure(): static
+    // {
+    //     return $this->afterCreating(function (Template $template) {
+    //         $background = fake()->image(storage_path('app/backgrounds'), 1080, 763, null, false);
+    //         $thumbnail = fake()->image(storage_path('app/public/thumbnails'), 300, 200, null, false);
 
-            $template->image = 'backgrounds/'.$background;
-            $template->thumbnail = 'thumbnails/'.$thumbnail;
-            $template->save();
-        });
-    }
+    //         $template->image = 'backgrounds/'.$background;
+    //         $template->thumbnail = 'thumbnails/'.$thumbnail;
+    //         $template->save();
+    //     });
+    // }
 }
